@@ -1,0 +1,35 @@
+name: ordermage
+
+ghc-options: -Wall
+
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs:
+      - test
+    dependencies:
+      - hspec
+      - ordermage
+      - servant-client
+      - warp >= 3.2.4
+      - http-client
+      - http-types
+
+library:
+  source-dirs:
+    - src
+
+executables:
+  ordermage:
+    main: exe/Main.hs
+    dependencies:
+      - ordermage
+
+dependencies:
+  - base
+  - servant
+  - servant-server
+  - transformers
+  - aeson
+  - wai
+  - warp
