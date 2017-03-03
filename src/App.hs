@@ -22,7 +22,7 @@ type ItemApi =
 itemApi :: Proxy ItemApi
 itemApi = Proxy
 
--- * app
+-- * run app
 
 run :: IO ()
 run = do
