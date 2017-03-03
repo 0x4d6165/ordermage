@@ -52,7 +52,7 @@ getItemById = \ case
 exampleItem :: Item
 exampleItem = Item 0 "example item"
 
--- * item
+-- * item info
 
 data Item
   = Item {
