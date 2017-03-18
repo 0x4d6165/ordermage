@@ -12,6 +12,7 @@ import Data.UUID
 import GHC.Generics
 import Servant
 import Utils
+import Data.Time.Clock
 
 type ItemApi =
   "item" :> Get '[JSON] [Item] :<|>
@@ -38,7 +39,9 @@ exampleItem = Item (genV5UUID "ordermage-example-items") "example item"
 data Item
   = Item {
     itemId :: UUID,
-    itemText :: String
+    itemText :: String,
+    numTimesOrdered :: Integer,
+    mostRecentOrder :: UTCTime
   }
   deriving (Eq, Show, Generic)
 
