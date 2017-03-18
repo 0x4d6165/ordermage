@@ -4,4 +4,4 @@ packages:
 ghc-options:
   "*": -Wall
 nix:
-  packages: [zlib]
+  packages: [zlib, postgresql96]
