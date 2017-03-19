@@ -13,6 +13,7 @@ import GHC.Generics
 import Servant
 import Utils
 import Data.Time.Clock
+import System.IO.Unsafe (unsafePerformIO)
 
 type ItemApi =
   "item" :> Get '[JSON] [Item] :<|>
@@ -32,7 +33,7 @@ getItemById = \ case
   _ -> throwE err404
 
 exampleItem :: Item
-exampleItem = Item (genV5UUID "ordermage-example-items") "example item"
+exampleItem = Item (genV5UUID "ordermage-example-items") "example item" 1 (unsafePerformIO getCurrentTime)
 
 -- * item info
 
@@ -46,8 +47,8 @@ data Item
   deriving (Eq, Show, Generic)
 
 instance ToJSON Item where
-  toJSON (Item itemId itemText) =
-      object ["itemId" .= show itemId, "itemText" .= itemText]
+  toJSON (Item itemId itemText numTimesOrdered mostRecentOrder) =
+    object ["itemId" .= show itemId, "itemText" .= itemText, "numTimesOrdered" .= numTimesOrdered, "mostRecentOrder" .= show numTimesOrdered]
 
 instance FromJSON UUID where
   parseJSON = withText "UUID" $ \t ->

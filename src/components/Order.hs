@@ -49,8 +49,8 @@ data Order
   deriving (Eq, Show, Generic)
 
 instance ToJSON Order where
-  toJSON (Order orderId orderText) =
-      object ["orderId" .= show orderId, "orderText" .= orderText]
+  toJSON (Order orderId orderItems orderUser orderDate) =
+    object ["orderId" .= show orderId, "orderItems" .= show orderItems, "orderUser" .= show orderUser, "orderDate" .= show orderDate]
 
 instance FromJSON UUID where
   parseJSON = withText "UUID" $ \t ->

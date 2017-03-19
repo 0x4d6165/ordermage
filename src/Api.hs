@@ -3,17 +3,20 @@
 
 module Api where
 
-import Servant
 import Item
+import Order
+import Servant
 import User
 
 -- * api
 type Api = ItemApi :<|>
-           UserApi
+           UserApi :<|>
+           OrderApi
 
 api :: Proxy Api
 api = Proxy
 
 server :: Server Api
 server = itemServer :<|>
-         userServer
+         userServer :<|>
+         orderServer
