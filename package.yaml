@@ -19,7 +19,6 @@ tests:
 library:
   source-dirs:
     - src
-    - src/components
 
 executables:
   ordermage:
@@ -34,6 +33,7 @@ dependencies:
   - email-validate >= 2
   - envy
   - opaleye >= 0.5
+  - postgresql-simple
   - servant
   - servant-server
   - text

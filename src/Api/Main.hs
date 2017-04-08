@@ -1,17 +1,17 @@
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeOperators #-}
 
-module Api where
+module Api.Main where
 
-import Item
-import Order
+import Api.Item
+import Api.Order
+import Api.User
 import Servant
-import User
 
 -- * api
-type Api = ItemApi :<|>
-           UserApi :<|>
-           OrderApi
+type Api = "item"  :> ItemApi :<|>
+           "user"  :> UserApi :<|>
+           "order" :> OrderApi
 
 api :: Proxy Api
 api = Proxy

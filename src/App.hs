@@ -2,11 +2,11 @@
 
 module App where
 
-import           Network.Wai
-import           Network.Wai.Handler.Warp
-import           Servant
-import           System.IO
-import           Api
+import Network.Wai
+import Network.Wai.Handler.Warp
+import Servant
+import System.IO
+import Api.Main
 
 -- * run app
 

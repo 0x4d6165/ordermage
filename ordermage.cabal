@@ -10,7 +10,6 @@ cabal-version:  >= 1.10
 library
   hs-source-dirs:
       src
-      src/components
   ghc-options: -Wall
   build-depends:
       aeson
@@ -19,6 +18,7 @@ library
     , email-validate >= 2
     , envy
     , opaleye >= 0.5
+    , postgresql-simple
     , servant
     , servant-server
     , text
@@ -28,12 +28,15 @@ library
     , wai
     , warp
   exposed-modules:
-      Api
+      Api.Item
+      Api.Main
+      Api.Order
+      Api.User
       App
+      Models.Item
+      Models.Order
+      Models.User
       Utils
-      Item
-      Order
-      User
   default-language: Haskell2010
 
 executable ordermage
@@ -46,6 +49,7 @@ executable ordermage
     , email-validate >= 2
     , envy
     , opaleye >= 0.5
+    , postgresql-simple
     , servant
     , servant-server
     , text
@@ -70,6 +74,7 @@ test-suite spec
     , email-validate >= 2
     , envy
     , opaleye >= 0.5
+    , postgresql-simple
     , servant
     , servant-server
     , text
