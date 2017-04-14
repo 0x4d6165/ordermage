@@ -7,6 +7,7 @@ import Api.Item
 import Api.Order
 import Api.User
 import Servant
+import Database.PostgreSQL.Simple (Connection)
 
 -- * api
 type Api = "item"  :> ItemApi :<|>
@@ -16,7 +17,7 @@ type Api = "item"  :> ItemApi :<|>
 api :: Proxy Api
 api = Proxy
 
-server :: Server Api
-server = itemServer :<|>
-         userServer :<|>
-         orderServer
+server :: Connection -> Server Api
+server con = itemServer con :<|>
+             userServer     :<|>
+             orderServer

@@ -30,19 +30,19 @@ toUserEmail = UserEmail
 
 data User
   = User {
-    userId    :: UserId,
-    userName  :: Text,
-    userEmail :: UserEmail,
-    userLevel :: UserLevel
+    _userId    :: UserId,
+    _userName  :: Text,
+    _userEmail :: UserEmail,
+    _userLevel :: UserLevel
   }
   deriving (Eq, Show, Generic)
 
 instance ToJSON User where
   toJSON User{..} = object [
-    "userId"    .= show userId,
-    "userName"  .= userName,
-    "userEmail" .= show userEmail,
-    "userLevel" .= show userLevel ]
+    "userId"    .= show _userId,
+    "userName"  .= _userName,
+    "userEmail" .= show _userEmail,
+    "userLevel" .= show _userLevel ]
 
 instance FromJSON UserId where
   parseJSON = withText "UUID" $ \t ->
