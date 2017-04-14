@@ -30,10 +30,13 @@ dependencies:
   - aeson
   - base
   - bytestring
+  - datetime >= 0.3
   - email-validate >= 2
   - envy
+  - http-api-data
   - opaleye >= 0.5
   - postgresql-simple
+  - product-profunctors
   - servant
   - servant-server
   - text

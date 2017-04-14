@@ -1,33 +1,34 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Api.Item where
 
-import Control.Monad.Trans.Except
-import Data.Time.Clock
-import Servant
-import System.IO.Unsafe (unsafePerformIO)
-import Utils
+import Control.Monad.IO.Class (liftIO)
+import Data.Maybe (listToMaybe)
+import Database.PostgreSQL.Simple (Connection)
 import Models.Item
+import Queries.Item
+import Servant
+import qualified Opaleye as O
 
 type ItemApi =
-   Get '[JSON] [Item] :<|>
-   Capture "itemId" Integer :> Get '[JSON] Item
+   Get '[JSON] [ItemRead]                                      :<|>
+   Capture "itemId" ItemId     :> Get '[JSON] (Maybe ItemRead) :<|>
+   ReqBody '[JSON] ItemWrite   :> Post '[JSON] (Maybe ItemId)
 
-itemServer :: Server ItemApi
-itemServer =
-  getItems :<|>
-  getItemById
+itemServer :: Connection -> Server ItemApi
+itemServer con =
+  getItems con    :<|>
+  getItemById con :<|>
+  postItem con
 
-getItems :: Handler [Item]
-getItems = return [exampleItem]
+getItems :: Connection -> Handler [ItemRead]
+getItems con = liftIO $ O.runQuery con itemsQuery
 
-getItemById :: Integer -> Handler Item
-getItemById = \ case
-  0 -> return exampleItem
-  _ -> throwE err404
+getItemById :: Connection -> ItemId -> Handler (Maybe ItemRead)
+getItemById con itemID = liftIO $ listToMaybe <$> O.runQuery con (itemByIdQuery itemID)
 
-exampleItem :: Item
-exampleItem = Item (toItemId $ genV5UUID "ordermage-example-items") "example item" 1 (unsafePerformIO getCurrentTime)
+postItem :: Connection -> ItemWrite -> Handler (Maybe ItemId)
+postItem con item = liftIO $ listToMaybe <$>
+  O.runInsertManyReturning con itemTable [itemToPG item] _itemId

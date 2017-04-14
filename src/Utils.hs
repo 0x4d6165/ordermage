@@ -13,3 +13,4 @@ strToWord8s = unpackBytes . pack
 
 genV5UUID :: String -> UUID
 genV5UUID object = generateNamed (unsafePerformIO nextRandom) (strToWord8s object)
+
