@@ -40,6 +40,7 @@ library
       Models.Order
       Models.User
       Queries.Item
+      Queries.Order
       Utils
   default-language: Haskell2010
 

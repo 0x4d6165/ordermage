@@ -12,6 +12,6 @@ itemsQuery = O.queryTable itemTable
 
 itemByIdQuery :: ItemId -> O.Query ItemColRead
 itemByIdQuery itemID = proc () -> do
-  item <- itemsQuery -< ()
-  O.restrict -< _itemId item .== O.pgUUID (fromItemId itemID)
-  returnA -< item
+  items <- itemsQuery -< ()
+  O.restrict -< _itemId items .== O.pgUUID (fromItemId itemID)
+  returnA -< items

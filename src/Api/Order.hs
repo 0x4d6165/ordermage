@@ -1,34 +1,34 @@
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Api.Order where
 
-import Control.Monad.Trans.Except
-import Data.Time.Clock
+import Control.Monad.IO.Class (liftIO)
+import Data.Maybe (listToMaybe)
+import Database.PostgreSQL.Simple (Connection)
 import Models.Order
-import Models.User
+import Queries.Order
 import Servant
-import System.IO.Unsafe (unsafePerformIO)
-import Utils
+import qualified Opaleye as O
 
 type OrderApi =
-  Get '[JSON] [Order] :<|>
-  Capture "orderId" Integer :> Get '[JSON] Order
+   Get '[JSON] [OrderRead]                                        :<|>
+   Capture "orderId" OrderId     :> Get '[JSON] (Maybe OrderRead) :<|>
+   ReqBody '[JSON] OrderWrite   :> Post '[JSON] (Maybe OrderId)
 
-orderServer :: Server OrderApi
-orderServer =
-  getOrders :<|>
-  getOrderById
+orderServer :: Connection -> Server OrderApi
+orderServer con =
+  getOrders con    :<|>
+  getOrderById con :<|>
+  postOrder con
 
-getOrders :: Handler [Order]
-getOrders = return [exampleOrder]
+getOrders :: Connection -> Handler [OrderRead]
+getOrders con = liftIO $ O.runQuery con ordersQuery
 
-getOrderById :: Integer -> Handler Order
-getOrderById = \ case
-  0 -> return exampleOrder
-  _ -> throwE err404
+getOrderById :: Connection -> OrderId -> Handler (Maybe OrderRead)
+getOrderById con orderID = liftIO $ listToMaybe <$> O.runQuery con (orderByIdQuery orderID)
 
-exampleOrder :: Order
-exampleOrder = Order (toOrderId $ genV5UUID "ordermage-example-orders") [] (toUserId $ genV5UUID "ordermange-user-example") (unsafePerformIO getCurrentTime)
+postOrder :: Connection -> OrderWrite -> Handler (Maybe OrderId)
+postOrder con order = liftIO $ listToMaybe <$>
+  O.runInsertManyReturning con orderTable [orderToPG order] _orderId

@@ -18,6 +18,6 @@ api :: Proxy Api
 api = Proxy
 
 server :: Connection -> Server Api
-server con = itemServer con :<|>
-             userServer     :<|>
-             orderServer
+server con = itemServer con  :<|>
+             userServer      :<|>
+             orderServer con
