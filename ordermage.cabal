@@ -1,0 +1,106 @@
+-- This file has been generated from package.yaml by hpack version 0.17.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:           ordermage
+version:        0.0.0
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  hs-source-dirs:
+      src
+  ghc-options: -Wall
+  build-depends:
+      aeson
+    , base
+    , bytestring
+    , datetime >= 0.3
+    , email-validate >= 2
+    , envy
+    , http-api-data
+    , opaleye >= 0.5
+    , postgresql-simple
+    , product-profunctors
+    , servant
+    , servant-server
+    , text
+    , time
+    , transformers
+    , uuid >= 1.3
+    , wai
+    , warp
+  exposed-modules:
+      Api.Item
+      Api.Main
+      Api.Order
+      Api.User
+      App
+      Models.Item
+      Models.Order
+      Models.User
+      Queries.Item
+      Queries.Order
+      Utils
+  default-language: Haskell2010
+
+executable ordermage
+  main-is: exe/Main.hs
+  ghc-options: -Wall
+  build-depends:
+      aeson
+    , base
+    , bytestring
+    , datetime >= 0.3
+    , email-validate >= 2
+    , envy
+    , http-api-data
+    , opaleye >= 0.5
+    , postgresql-simple
+    , product-profunctors
+    , servant
+    , servant-server
+    , text
+    , time
+    , transformers
+    , uuid >= 1.3
+    , wai
+    , warp
+    , ordermage
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  hs-source-dirs:
+      test
+  ghc-options: -Wall
+  build-depends:
+      aeson
+    , base
+    , bytestring
+    , datetime >= 0.3
+    , email-validate >= 2
+    , envy
+    , http-api-data
+    , opaleye >= 0.5
+    , postgresql-simple
+    , product-profunctors
+    , servant
+    , servant-server
+    , text
+    , time
+    , transformers
+    , uuid >= 1.3
+    , wai
+    , warp
+    , bytestring
+    , hspec
+    , http-client
+    , http-types
+    , ordermage
+    , servant-client
+    , warp >= 3.2.4
+  other-modules:
+      AppSpec
+  default-language: Haskell2010

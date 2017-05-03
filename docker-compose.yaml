@@ -1,0 +1,31 @@
+db:
+  image: postgres:latest
+  environment:
+    POSTGRES_USER: ordermage
+    POSTGRES_PASSWORD: thisisatest
+  volumes:
+    - ./data:/var/lib/postgresql/data
+    - ./dbscripts:/docker-entrypoint-initdb.d
+  ports:
+    - "127.0.0.1:5432:5432"
+
+nginx:
+  build: nginx/.
+  links:
+    - ordermage
+  volumes:
+    - ./dist:/var/www/static/dist
+  ports:
+    - 80:80
+
+ordermage:
+  build: .
+  links:
+    - db
+  #environment:
+    #POSTGRES_HOST: db
+    #POSTGRES_USER: sizzeDog
+    #POSTGRES_PASSWORD: awfulPassword
+    #NODE_ENV: production
+  volumes:
+    - .:/var/www/

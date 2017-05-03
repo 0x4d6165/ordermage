@@ -1,0 +1,9 @@
+resolver: lts-8.5
+packages:
+  - '.'
+ghc-options:
+  "*": -Wall
+nix:
+  packages: [zlib, postgresql96]
+extra-deps:
+  - "datetime-0.3.1"

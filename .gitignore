@@ -1,0 +1,8 @@
+.idea/
+node_modules/
+public/js/
+public/css/
+data
+.stack-work
+dist/bundle.js
+dist/main.css
