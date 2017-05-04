@@ -1,4 +1,4 @@
 # ordermage
 
-## Contributors
+#### Contributors
 Ashlyn Madinya and Edward Jang
