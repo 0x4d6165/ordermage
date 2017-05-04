@@ -11,21 +11,19 @@ db:
 
 nginx:
   build: nginx/.
-  links:
-    - ordermage
+  #links:
+    #- ordermage
   volumes:
     - ./dist:/var/www/static/dist
   ports:
     - 80:80
 
-ordermage:
-  build: .
-  links:
-    - db
+#ordermage:
+  #build: .
+  #links:
+    #- db
   #environment:
-    #POSTGRES_HOST: db
-    #POSTGRES_USER: sizzeDog
-    #POSTGRES_PASSWORD: awfulPassword
-    #NODE_ENV: production
-  volumes:
-    - .:/var/www/
+    #POSTGRES_USER: 
+    #POSTGRES_PASSWORD: thisisatest
+  #volumes:
+    #- .:/var/www/

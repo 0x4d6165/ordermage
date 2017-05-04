@@ -63,10 +63,10 @@ type OrderColWrite = Order' (Maybe (O.Column O.PGUuid))
 
 instance ToJSON OrderRead where
   toJSON Order{..} = object [
-    "orderId"    .= show _orderId,
-    "orderItems" .= _orderItems,
+    "_orderId"    .= show _orderId,
+    "_orderItems" .= _orderItems,
     {-"orderUser"  .= show _orderUser,-}
-    "orderDate"  .= show _orderDate ]
+    "_orderDate"  .= show _orderDate ]
 
 instance ToJSON OrderId where
   toJSON = String . pack . show . fromOrderId

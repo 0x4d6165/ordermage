@@ -1,6 +1,6 @@
 import React from "react";
 import { Router, Route, IndexRoute } from "react-router";
-import { history } from "./store.js";
+import { history } from "./redux/store.js";
 import App from "./components/App";
 import Home from "./components/Home";
 import Cart from "./components/Cart";

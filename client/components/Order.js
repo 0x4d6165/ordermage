@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Component, PropTypes } from "react";
 
 // Home page component
-export default class Order extends React.Component {
+export default class Order extends Component {
   // render
   render() {
+    console.log("Today's order is:"+this.props.order);
     return (
       <div className="order">
         <p>Id: {this.props.order._orderId}</p>

@@ -13,9 +13,9 @@ import Servant
 import qualified Opaleye as O
 
 type ItemApi =
-   Get '[JSON] [ItemRead]                                      :<|>
-   Capture "itemId" ItemId     :> Get '[JSON] (Maybe ItemRead) :<|>
-   ReqBody '[JSON] ItemWrite   :> Post '[JSON] (Maybe ItemId)
+  Get '[JSON] [ItemRead]                                      :<|>
+  Capture "itemId" ItemId     :> Get '[JSON] (Maybe ItemRead) :<|>
+  ReqBody '[JSON] ItemWrite   :> Post '[JSON] (Maybe ItemId)
 
 itemServer :: Connection -> Server ItemApi
 itemServer con =
