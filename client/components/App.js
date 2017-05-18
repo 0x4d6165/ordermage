@@ -1,6 +1,6 @@
 import React from "react";
 import "../stylesheets/main.scss";
-import Header from './Header.js'
+import Header from './Header.js';
 
 // app component
 export default class App extends React.Component {
