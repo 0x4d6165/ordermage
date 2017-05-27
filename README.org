@@ -1,4 +1,13 @@
-#ordermage
+* ordermage
+
+*** Contributors
+| Contributor      | Role                                          |
+|------------------+-----------------------------------------------|
+| Carolyn Saunders | Programming and stack design                  |
+| Edward Jang      | Documentation                                 |
+| Ashlyn Madinya   | Site design (not implemented yet :grimacing:) |
+
+*** Usage
 
 This is a very minimal example of a project that uses
 
@@ -8,40 +17,40 @@ This is a very minimal example of a project that uses
 
 To set up the project and run the test-suite, do:
 
-``` bash
+#+BEGIN_SRC bash
 stack setup
 stack test --fast
-```
+#+END_SRC
 
 To execute the test-suite faster while developing, do:
-``` bash
+#+BEGIN_SRC bash
 chmod go-w .ghci .
 stack exec ghci test/Spec.hs
-```
+#+END_SRC
 
 and then at the `ghci` prompt do:
 
-``` haskell
+#+BEGIN_SRC haskell
 :main
-```
+#+END_SRC
 
 to run the tests and
 
-``` haskell
+#+BEGIN_SRC haskell
 :r
 :main
-```
+#+END_SRC
 
 to reload the code (after making changes) and run the tests again.
 
 To run the app, do:
 
-``` bash
+#+BEGIN_SRC bash
 stack exec example-servant-minimal
-```
+#+END_SRC
 
 Then you can query the server like this:
 
-``` bash
+#+BEGIN_SRC bash
 curl localhost:3000/item
-```
+#+END_SRC

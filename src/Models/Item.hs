@@ -19,7 +19,7 @@ import GHC.Generics
 import Web.HttpApiData (FromHttpApiData, parseUrlPiece, parseHeader)
 import qualified Opaleye as O
 import qualified Opaleye.Internal.Column as C
-{-import Data.Time.Clock (UTCTime)-}
+-- import Data.Time.Clock (UTCTime)
 
 newtype ItemId = ItemId UUID
   deriving (Show, Eq, Generic)
